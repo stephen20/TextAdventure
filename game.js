@@ -1,42 +1,67 @@
-var player = {
-	name: "",
-	profession: "",
-	items: []
-};
-player.pickUp = function(item){
-	this.player.items.push(item);
-	return items;
+function interpret(input) {
+    var cmd = {}, tokens = input.trim().toLowerCase().split(" ");
+    cmd.action = tokens.shift();
+    cmd.target = tokens.join(" ");
+    return cmd;
 }
-player.drop = function(item){
-	var indexNum = this.player.items.indexOf(item);
-	if (indexNum >= 0){
-		//drop item
-		this.player.items.splice(indexNum,1)
-	}
-	else{
-		//print you don't have this item
-		//wherever I put it in HTML part .innerHTML = "You don't have this item!";
-	}
-	return items;
+function execute(command) {
+    player[command.action](command.target);
+}
+function report(result) { // note: parameter not currently used
+    displayActions();
+    displayInventory();
+    displayScene();
+}
+function gameStep(string){
+	var cmd = interpret(input); // parse the user input
+    var result = execute(cmd); // run the desired command
+    report(result); // display the results on the screen
 }
 
-var interpret = function(string){
+function gameStart() {
+    var inputBox = document.querySelector("input");
+    inputBox.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            gameStep(this.value);
+        }
+  	});
+  	document.getElementById("descrip").innerHTML = "You see something shiny in the dirt below you.");
+  	document.getElementById("feedback").innerHTML = "Possible actions: Pick up, Look");
+}
+function displayInventory() {
+    var i, item, inventory;
+    inventory = document.querySelector("#inventory > ul");
+    clearContent(inventory);
+    for (i in player.items) {
+        item = document.createElement ("li");
+        item.textContent = player.items[i];
+        inventory.appendChild(item);
+    }
+}
+function displayScene() {
 
 }
-
-var execute = function(player){
-
+function clearContent(node) {
+    while (node.hasChildNodes()) {
+        node.removeChild(node.firstChild);
+    }
 }
-var report = function(){
-
+function readInfo (){
+	var inputBox, inputStr;
+  	inputBox = document.getElementById("action");
+  	inputStr = inputBox.value;
+  	return inputStr;
 }
-
-var gameStep = funciton(string){
-
+function gameIntro() {
+    var inputBox = document.getElementById("action");
+    inputBox.addEventListener ("keyup", listener);
+    var listener = function(event) {
+        if (event.keyCode === 13) {
+            // remove this listener before continuing so it only runs once
+            event.target.removeEventListener("keyup", listener);
+            player(this.value);
+            gameStart();
+        }
+    };
 }
-
-var gameStart = function(){
-
-}
-
-window.addEventListener("load", gameStart());
+window.onload = gameIntro;
