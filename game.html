@@ -4,22 +4,28 @@
 
     <title> Text Adventure Game </title>
     <meta charset="UTF-8"/>
-    <link href="game.css" rel="stylesheet" />
+    <script src="locations.js"></script>
     <script src="game.js"></script>
+    <script src="player.js"></script>
+    <link href="game.css" rel="stylesheet" />
+
 
 </head>
 <body>
 
     <header>
-        <h1> TITLE OF MY TEXT ADVENTURE </h1>
+        <h1>
+        <img src="http://www.fontspace.com/preview/m/554326ce00aec206aad3d19c1df0fe0f.png" alt="title" style="width:500px;height:100px">
+        </h1>
     </header>
 
     <main id="game">
-    
+
         <output id="scene">
             <p id="descrip">
-                You awaken to find yourself lying on the cold, marble floor of an impressive cathedral. Everything is silent, and you appear to be alone.
+                You awaken to find yourself lying on the cold, dirty floor of a jail cell. A strange voice from the cell next to you calls out and asks for your name. (Type in a name then hit enter.)
             </p>
+             <p id="feedback"></p>
             <label for="action"> What will you do? </label>
         </output>
 
@@ -42,9 +48,8 @@
     </aside>
 
     <footer>
-        Copyright (c) 2014 YOUR NAME HERE. All rights reserved.
+        Copyright (c) 2014 Stephen Pagliuca. All rights reserved.
     </footer>
 
 </body>
 </html>
-
